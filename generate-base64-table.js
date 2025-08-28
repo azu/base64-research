@@ -64,14 +64,15 @@ function encodeBase64Multiple(str, times) {
 
 // テーブル生成
 console.log('# Base64 エンコーディング サンプルテーブル\n');
-console.log('| No | 元のトークン (最初の40文字) | Base64 x1 | Base64 x2 | Base64 x3 |');
-console.log('|----|------------------------------|-----------|-----------|-----------|');
+console.log('| No | 元のトークン (最初の40文字) | Base64 x1 | Base64 x2 | Base64 x3 | Base64 x4 |');
+console.log('|----|------------------------------|-----------|-----------|-----------|-----------|');
 
 sampleTokens.forEach((token, index) => {
   const truncated = token.length > 40 ? token.substring(0, 37) + '...' : token;
   const base64_1 = encodeBase64Multiple(token, 1);
   const base64_2 = encodeBase64Multiple(token, 2);
   const base64_3 = encodeBase64Multiple(token, 3);
+  const base64_4 = encodeBase64Multiple(token, 4);
   
   // 長いエンコード結果は最初の30文字と最後の10文字を表示
   const truncateEncoded = (str) => {
@@ -81,11 +82,11 @@ sampleTokens.forEach((token, index) => {
     return str;
   };
   
-  console.log(`| ${(index + 1).toString().padStart(2, '0')} | \`${truncated}\` | \`${truncateEncoded(base64_1)}\` | \`${truncateEncoded(base64_2)}\` | \`${truncateEncoded(base64_3)}\` |`);
+  console.log(`| ${(index + 1).toString().padStart(2, '0')} | \`${truncated}\` | \`${truncateEncoded(base64_1)}\` | \`${truncateEncoded(base64_2)}\` | \`${truncateEncoded(base64_3)}\` | \`${truncateEncoded(base64_4)}\` |`);
 });
 
 console.log('\n## 多層エンコーディングの特徴\n');
 console.log('- **Base64 x1**: 元の文字列の約1.33倍のサイズ');
 console.log('- **Base64 x2**: 元の文字列の約1.78倍のサイズ');
 console.log('- **Base64 x3**: 元の文字列の約2.37倍のサイズ');
-console.log('- **Base64 x4以降**: 「Vm0wd」プレフィックスが現れる');
+console.log('- **Base64 x4**: 元の文字列の約3.16倍のサイズ - **「Vm0wd」プレフィックスが現れる！**');
